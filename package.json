@@ -11,9 +11,15 @@
         "start": "node mqtt-presence.js"
     },
     "dependencies": {
+        "winston": "^2.3.1",
+        "winston-logstash": "^0.3.0",
         "request": "^2.81.0",
         "mqtt": "^2.6.2",
-        "url": "^0.11.0"
+        "path": "^0.12.7",
+        "watch": "^1.0.2",
+        "js-yaml": "^3.8.3",
+        "url": "^0.11.0",
+        "express": "*"
     },
     "engines": {
         "node": ">=4"

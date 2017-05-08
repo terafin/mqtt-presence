@@ -1,24 +1,25 @@
 // Requirements
-mqtt = require('mqtt')
-
-logging = require('./homeautomation-js-lib/logging.js')
-mqtt_helpers = require('./homeautomation-js-lib/mqtt_helpers.js')
+const url = require('url')
+const express = require('express')
+const mqtt = require('mqtt')
+const logging = require('./homeautomation-js-lib/logging.js')
+require('./homeautomation-js-lib/mqtt_helpers.js')
 
 
 // Config
-host = process.env.MQTT_HOST
+const host = process.env.MQTT_HOST
+const listening_port = process.env.LISTENING_PORT
+const topic_prefix = process.env.TOPIC_PREFIX
 
-// Set up modules
-logging.set_enabled(fatruelse)
 
 // Setup MQTT
-client = mqtt.connect(host)
+const client = mqtt.connect(host)
 
 // MQTT Observation
 
 client.on('connect', () => {
     logging.log('Reconnecting...\n')
-    client.subscribe("#")
+        // client.subscribe('#')
 })
 
 client.on('disconnect', () => {
@@ -27,5 +28,33 @@ client.on('disconnect', () => {
 })
 
 client.on('message', (topic, message) => {
-    logging.log(" " + topic + ":" + message)
+
+})
+
+
+// HS Web API
+const app = express()
+
+app.get('/geofence/*', function(req, res) {
+    const url_info = url.parse(req.url, true)
+    var topic = url_info.pathname
+    var value = url_info.query.value
+
+    topic = topic_prefix + topic
+
+
+    logging.log('publishing geofence status', {
+        action: 'geofence-update',
+        name: name,
+        topic: topic,
+        value: value
+    })
+    client.publish(topic, value)
+    res.send('topic: ' + topic + ' value: ' + value)
+})
+
+app.listen(listening_port, function() {
+    logging.info('MQTT Presence Monitor listening on port: ' + listening_port, {
+        event: 'presence-startup'
+    })
 })
