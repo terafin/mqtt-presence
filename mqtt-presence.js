@@ -5,9 +5,9 @@ const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
 const _ = require('lodash')
 const logging = require('./homeautomation-js-lib/logging.js')
+require('./homeautomation-js-lib/mqtt_helpers.js')
 
 // Config
-const host = process.env.MQTT_HOST
 const listening_port = process.env.LISTENING_PORT
 var topic_prefix = process.env.TOPIC_PREFIX
 
@@ -16,36 +16,18 @@ if (_.isNil(listening_port)) {
     process.abort()
 }
 
-
-if (_.isNil(host)) {
-    logging.warn('empty mqtt host, not starting')
-    process.abort()
-}
-
 if (_.isNil(topic_prefix)) {
     logging.warn('empty topic prefix, using /presence')
     topic_prefix = '/presence'
 }
 
-
 // Setup MQTT
-const client = mqtt.connect(host)
+const client = mqtt.setupClient(null, null)
 
 if (_.isNil(client)) {
     logging.warn('MQTT Client Failed to Startup')
     process.abort()
 }
-
-// MQTT Observation
-
-client.on('connect', () => {
-    logging.log('Reconnecting...\n')
-})
-
-client.on('disconnect', () => {
-    logging.log('Reconnecting...\n')
-    client.connect(host)
-})
 
 
 // HS Web API
