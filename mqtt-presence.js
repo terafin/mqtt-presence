@@ -3,6 +3,7 @@ const url = require('url')
 const express = require('express')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
+const repeat = require('repeat')
 const _ = require('lodash')
 const logging = require('./homeautomation-js-lib/logging.js')
 require('./homeautomation-js-lib/mqtt_helpers.js')
@@ -85,3 +86,35 @@ app.listen(listening_port, function() {
         event: 'presence-startup'
     })
 })
+
+const findLocalDevices = require('local-devices')
+
+// Find all local network devices.
+findLocalDevices().then(devices => {
+    logging.debug(devices)
+        /*
+         [
+           { name: '?', ip: '192.168.0.10', mac: '...' },
+           { name: '...', ip: '192.168.0.17', mac: '...' },
+           { name: '...', ip: '192.168.0.21', mac: '...' },
+           { name: '...', ip: '192.168.0.22', mac: '...' }
+         ]
+         */
+})
+
+
+function scanForDevices() {
+    // Find a single device by ip address.
+    findLocalDevices('10.0.1.187').then(device => {
+        logging.debug(' found my phone: ' + JSON.stringify(device))
+            /*
+             {
+               name: '?',
+               ip: '192.168.0.10',
+               mac: '...'
+             }
+             */
+    })
+}
+
+repeat(scanForDevices).every(1, 's').start.in(1, 'sec')
