@@ -5,8 +5,8 @@ const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
 const repeat = require('repeat')
 const _ = require('lodash')
-const logging = require('./homeautomation-js-lib/logging.js')
-require('./homeautomation-js-lib/mqtt_helpers.js')
+const logging = require('homeautomation-js-lib/logging.js')
+require('homeautomation-js-lib/mqtt_helpers.js')
 
 // Config
 const listening_port = process.env.LISTENING_PORT
