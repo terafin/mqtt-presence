@@ -75,7 +75,7 @@ app.post('/geofence/*', function(req, res) {
     }))
 
     if (!_.isNil(topic) && !_.isNil(value)) {
-        client.publish(topic, value)
+        client.publish(topic, value, { retain: true })
     }
 
     res.send('topic: ' + topic + ' value: ' + value)
