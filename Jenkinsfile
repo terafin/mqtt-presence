@@ -6,6 +6,7 @@ node {
    }
    stage('Docker Build') {
        sh 'docker build --rm=false -t "$DOCKER_USER/$JOB_NAME" .'
+       sh 'docker build --rm=false -t "home-registry.registry.rancher.internal/$JOB_NAME" .'
    }
    stage('Push to Docker') {
       sh 'docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"'
