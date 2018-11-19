@@ -14,10 +14,8 @@
         "body-parser": "latest",
         "express": "latest",
         "homeautomation-js-lib": "git://github.com/terafin/homeautomation-js-lib.git",
-        "local-devices": "latest",
         "lodash": "latest",
-        "mqtt": "latest",
-        "repeat": "latest"
+        "mqtt": "latest"
     },
     "engines": {
         "node": ">=4"
