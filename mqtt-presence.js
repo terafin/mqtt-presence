@@ -1,4 +1,4 @@
-// Requirements
+o// Requirements
 const url = require('url')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -88,7 +88,7 @@ app.post('/geofence/*', function(req, res) {
 	}))
 
 	if (!_.isNil(topic) && !_.isNil(entry)) {
-		client.publish(topic, entry, {retain: true, qos: 2})
+		client.publish(topic, entry, {retain: true, qos: 1})
 	}
 
 	res.send('topic: ' + topic + ' value: ' + entry)
