@@ -1,10 +1,11 @@
-o// Requirements
+// Requirements
 const url = require('url')
 const express = require('express')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
 const _ = require('lodash')
 const logging = require('homeautomation-js-lib/logging.js')
+
 require('homeautomation-js-lib/mqtt_helpers.js')
 
 // Config
