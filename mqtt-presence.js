@@ -48,21 +48,21 @@ app.post('/geofence/*', function(req, res) {
 	const components = topic.split('/')
 	const person = _.last(components)
 
-	const id = body.id
-	const wifiBSSID = body.wifiBSSID
-	const radius = body.radius
+	// const id = body.id
+	// const wifiBSSID = body.wifiBSSID
+	// const radius = body.radius
 	const entry = body.entry
-	const motion = body.motion
-	const longitude = body.longitude
-	const wifiSSID = body.wifiSSID
-	const latitude = body.latitude
-	const date = body.date
-	const address = body.address
-	const currentLatitude = body.currentLatitude
-	const device = body.device
-	const currentLongitude = body.currentLongitude
+	// const motion = body.motion
+	// const longitude = body.longitude
+	// const wifiSSID = body.wifiSSID
+	// const latitude = body.latitude
+	// const date = body.date
+	// const address = body.address
+	// const currentLatitude = body.currentLatitude
+	// const device = body.device
+	// const currentLongitude = body.currentLongitude
 	const name = body.name
-	const action = body.action // geofence-update
+	// const action = body.action // geofence-update
 
 	if (_.isNil(body)) {
 		res.send('empty body')
@@ -81,12 +81,8 @@ app.post('/geofence/*', function(req, res) {
 
 	topic = topic_prefix + '/geofence/' + name.toLowerCase() + '/' + person
 
-	logging.debug('body: ' + JSON.stringify(body))
-	logging.info('publishing geofence status', Object.assign(body, {
-		action: 'geofence-update',
-		topic: topic,
-		value: entry
-	}))
+	logging.info('body: ' + JSON.stringify(body))
+	logging.info('publishing geofence status: ' + topic + ' value: ' + entry)
 
 	if (!_.isNil(topic) && !_.isNil(entry)) {
 		client.publish(topic, entry, {retain: true, qos: 1})
