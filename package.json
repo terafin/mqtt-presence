@@ -13,7 +13,7 @@
     "dependencies": {
         "body-parser": "latest",
         "express": "latest",
-        "homeautomation-js-lib": "git://github.com/terafin/homeautomation-js-lib.git",
+        "homeautomation-js-lib": "git+https://gitlab.siliconspirit.net/home/homeautomation-js-lib.git",
         "lodash": "^4.17.11",
         "mqtt": "latest"
     },
