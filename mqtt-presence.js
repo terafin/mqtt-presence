@@ -5,8 +5,7 @@ const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
 const _ = require('lodash')
 const logging = require('homeautomation-js-lib/logging.js')
-
-require('homeautomation-js-lib/mqtt_helpers.js')
+const mqtt_helpers = require('homeautomation-js-lib/mqtt_helpers.js')
 
 // Config
 const listening_port = process.env.LISTENING_PORT
@@ -23,7 +22,7 @@ if (_.isNil(topic_prefix)) {
 }
 
 // Setup MQTT
-const client = mqtt.setupClient(null, null)
+const client = mqtt_helpers.setupClient(null, null)
 
 if (_.isNil(client)) {
 	logging.warn('MQTT Client Failed to Startup')
