@@ -1,23 +1,27 @@
 {
-    "name": "mqtt-presence",
-    "version": "0.0.1",
-    "description": "MQTT presence handler",
-    "license": "MIT",
-    "main": "mqtt-presence.js",
-    "repository": {
-        "url": "https://github.com/terafin/mqtt-presence.js"
-    },
-    "scripts": {
-        "start": "node mqtt-presence.js"
-    },
-    "dependencies": {
-        "body-parser": "latest",
-        "express": "latest",
-        "homeautomation-js-lib": "https://github.com/terafin/homeautomation-js-lib.git",
-        "lodash": "^4.17.15",
-        "mqtt": "latest"
-    },
-    "engines": {
-        "node": ">=4"
-    }
+  "name": "mqtt-presence",
+  "version": "0.0.1",
+  "description": "MQTT presence handler",
+  "license": "MIT",
+  "main": "mqtt-presence.js",
+  "repository": {
+    "url": "https://github.com/terafin/mqtt-presence.js"
+  },
+  "scripts": {
+    "start": "node mqtt-presence.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "homeautomation-js-lib": "https://github.com/terafin/homeautomation-js-lib.git",
+    "lodash": "^4.17.15",
+    "mqtt": "latest",
+    "snyk": "^1.316.1"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "snyk": true
 }
