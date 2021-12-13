@@ -78,13 +78,13 @@ app.post('/geofence/*', function(req, res) {
 		return
 	}
 
-	topic = topic_prefix + '/geofence/' + name.toLowerCase() + '/' + person
+	topic = mqtt_helpers.generateTopic(topic_prefix, 'geofence', name.toLowerCase(), person)
 
 	logging.info('body: ' + JSON.stringify(body))
 	logging.info('publishing geofence status: ' + topic + ' value: ' + entry)
 
 	if (!_.isNil(topic) && !_.isNil(entry)) {
-		client.publish(mqtt_helpers.generateTopic(topic), entry, {retain: true, qos: 1})
+		client.publish(topic, entry, {retain: true, qos: 1})
 	}
 
 	res.send('topic: ' + topic + ' value: ' + entry)
