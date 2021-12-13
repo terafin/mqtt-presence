@@ -84,7 +84,7 @@ app.post('/geofence/*', function(req, res) {
 	logging.info('publishing geofence status: ' + topic + ' value: ' + entry)
 
 	if (!_.isNil(topic) && !_.isNil(entry)) {
-		client.publish(topic, entry, {retain: true, qos: 1})
+		client.publish(mqtt_helpers.generateTopic(topic), entry, {retain: true, qos: 1})
 	}
 
 	res.send('topic: ' + topic + ' value: ' + entry)
